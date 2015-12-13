@@ -1,0 +1,7 @@
+{
+  "name": "tachometer",
+  "version": "0.0.1",
+  "dependencies": {
+    "chartjs": "2.0.0-beta1"
+  }
+}
