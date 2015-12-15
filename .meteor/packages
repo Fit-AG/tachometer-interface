@@ -17,13 +17,14 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 autopublish             # Publish all data to the clients (for prototyping)
 insecure                # Allow all DB writes from clients (for prototyping)
 
-##
+## technology stack
 mquandalle:bower
 momentjs:moment
+jagi:astronomy
 
-## user interface
-react
+## user interface stack
 less
+react
 kadira:react-layout
 kadira:flow-router
 zodiase:mdl
