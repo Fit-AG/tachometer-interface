@@ -1,7 +1,8 @@
 TachometerTimeline = React.createClass({
   mixins: [ReactMeteorData],
   render(){
-    return (
+    return 
+    (
       <canvas ref="canvas" style={{margin: "1em"}}/>
     );
   },
@@ -14,9 +15,11 @@ TachometerTimeline = React.createClass({
         measurement: Measurements.findOne({})
     };
 
-    if(data.measurement !== undefined)
-      this.renderChart();
     return data;
+  },
+  componentDidMount(){
+    if(this.data.measurement !== undefined)
+      this.renderChart();
   },
   renderChart(){
     const options = {
