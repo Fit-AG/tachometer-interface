@@ -66,7 +66,8 @@ Measurement = Astro.Class({
       let prefixedDataSets = {};
       //iterate each segment in the measurement
       for(let {timeStamp, data} of this.segments){
-        for(let dataKey in data){
+        console.log(data);
+        for(var dataKey in data){
           //only iterate through own properties (possibly prototypes?)
           if(!data.hasOwnProperty(dataKey))
             break;
@@ -74,8 +75,9 @@ Measurement = Astro.Class({
           if(prefixedDataSets[dataKey] === undefined)
             prefixedDataSets[dataKey] = {data: []};
           //map properties from database schema to dataSet schema
-          console.log(data[key]);
-          prefixedDataSets[dataKey].data.push({x: timeStamp, y: data[dataKey]});
+          console.log(data[dataKey]);
+          console.log(dataKey);
+          prefixedDataSets[dataKey].data.push({x: timeStamp.getTime(), y: data[dataKey]});
         }
       }
       let dataSets = [];

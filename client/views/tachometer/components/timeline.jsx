@@ -1,8 +1,7 @@
 TachometerTimeline = React.createClass({
   mixins: [ReactMeteorData],
   render(){
-    return 
-    (
+    return (
       <canvas ref="canvas" style={{margin: "1em"}}/>
     );
   },
@@ -17,14 +16,22 @@ TachometerTimeline = React.createClass({
 
     return data;
   },
-  componentDidMount(){
+  componentWillUpdate(){
     if(this.data.measurement !== undefined)
       this.renderChart();
   },
   renderChart(){
     const options = {
       tooltips: {
-         mode: 'label'
+         mode: 'label',
+         backgroundColor: "#263238",
+         titleFontSize: 15,
+         caretSize: 10,
+         callbacks: {
+           title: function(dataPoint, dataSets){
+             return moment(dataPoint[0].xLabel).format("HH:mm:ss:SSS A - ll");
+           }
+         }
       },
       elements: {
         line: {
@@ -35,8 +42,9 @@ TachometerTimeline = React.createClass({
 					xAxes: [{
 						type: "time",
 						time: {
-							// format: "HH:mm:ss:SSS",
-              displayFormat: "HH:mm:ss"
+							format: "HH:mm:ss:SSS",
+							// unit: 'millisecond',
+              // displayFormat: "HH:mm:ss:SSS"
 						},
 						scaleLabel: {
 							display: true,
