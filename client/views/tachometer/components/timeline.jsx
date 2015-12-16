@@ -1,55 +1,24 @@
 TachometerTimeline = React.createClass({
+  mixins: [ReactMeteorData],
   render(){
     return (
       <canvas ref="canvas" style={{margin: "1em"}}/>
     );
   },
-  componentDidMount(){
-    let canvas = this.refs.canvas;
+  getMeteorData() {
+    let self = this;
+    let handle = Meteor.subscribe("measurements", function(){
+      console.log("setupCharts");
+      self.setupChart();
+    });
 
-    let data = {datasets: [{
-        label: "Geschwindigkeit",
-        yAxisID: "speed",
-        borderColor: "#F44336",
-        data: [{
-          x: 123456,
-          y: 10
-        }, {
-          x: 434479,
-          y: 17
-        },
-        {
-          x: 825437,
-          y: 18
-        },
-        {
-          x: 1624739,
-          y: 12
-        }],
-        fill: false
-      },{
-        label: "Frequenz",
-        yAxisID: "frequency",
-        borderColor: "#2196F3",
-        data: [{
-          x: 123456,
-          y: 2
-        }, {
-          x: 434479,
-          y: 6
-        },
-        {
-          x: 825437,
-          y: 3
-        },
-        {
-          x: 1624739,
-          y: 0.7
-        }],
-        fill: false
-      }]
+    console.log(handle);
+    return {
+      isLoading: !handle.ready(),
+      measurement: Measurements.findOne({})
     };
-
+  },
+  setupChart(){
     const options = {
       tooltips: {
          mode: 'label'
@@ -91,10 +60,16 @@ TachometerTimeline = React.createClass({
 				},
     };
 
-    let chart = new Chart(canvas, {
-      type: "line",
-      data,
-      options
-    });
+    let canvas = this.refs.canvas;
+    console.log(this.data);
+    let object = {
+        type: "line",
+        data: {
+          datasets: this.data.measurement.datasets()
+        },
+        options
+    };
+    console.log(object);
+    let chart = new Chart(canvas, object);
   }
 });

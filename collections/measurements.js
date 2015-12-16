@@ -1,8 +1,27 @@
 Measurements = new Mongo.Collection("measurements");
 
+if(Meteor.isServer){
+  Meteor.publish("measurements", function () {
+    return Measurements.find({}, {sort: {DateTime: -1, limit: 1}});
+  })
+}
+
 //keep in mind: objects despite of declared as const are immutable
 //const makes references not values constant
-const dataSetsDefaults = {};
+const dataSetsDefaults = {
+  speed: {
+    label: "Geschwindigkeit",
+    yAxisID: "speed",
+    borderColor: "#F44336",
+    fill: false
+  },
+  frequency: {
+    label: "Frequenz",
+    yAxisID: "frequency",
+    borderColor: "#2196F3",
+    fill: false
+  }
+};
 
 MeasurementSegment = Astro.Class({
   name: "MeasurementSegment",
@@ -25,16 +44,6 @@ Measurement = Astro.Class({
       type: "date",
       default: -1
     },
-    duration: {
-      //returns a moment.duration()
-      type: "object",
-      transient: true
-    },
-    running: {
-      //returns true when endTime is not set or less than 0
-      type: "boolean",
-      transient: true
-    },
     segments: {
       type: 'array',
       nested: 'MeasurementSegment',
@@ -56,7 +65,7 @@ Measurement = Astro.Class({
       //dataSets labeled with keys
       let prefixedDataSets = {};
       //iterate each segment in the measurement
-      for(let {timeStamp, data} of segments){
+      for(let {timeStamp, data} of this.segments){
         for(let dataKey in data){
           //only iterate through own properties (possibly prototypes?)
           if(!data.hasOwnProperty(dataKey))
@@ -65,6 +74,10 @@ Measurement = Astro.Class({
           if(prefixedDataSets[dataKey] === undefined)
             prefixedDataSets[dataKey] = {data: []};
           //map properties from database schema to dataSet schema
+          console.log("data: "+JSON.stringify(data[dataKey]));
+          console.log(dataKey);
+          console.log(data);
+          console.log(data["speed"]);
           prefixedDataSets[dataKey].data.push({x: timeStamp, y: data[dataKey]});
         }
       }
