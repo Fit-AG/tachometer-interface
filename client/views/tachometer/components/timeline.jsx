@@ -7,18 +7,18 @@ TachometerTimeline = React.createClass({
   },
   getMeteorData() {
     let self = this;
-    let handle = Meteor.subscribe("measurements", function(){
-      console.log("setupCharts");
-      self.setupChart();
-    });
+    let handle = Meteor.subscribe("measurements");
 
-    console.log(handle);
-    return {
-      isLoading: !handle.ready(),
-      measurement: Measurements.findOne({})
+    let data = {
+        isLoading: !handle.ready(),
+        measurement: Measurements.findOne({})
     };
+
+    if(data.measurement !== undefined)
+      this.renderChart();
+    return data;
   },
-  setupChart(){
+  renderChart(){
     const options = {
       tooltips: {
          mode: 'label'

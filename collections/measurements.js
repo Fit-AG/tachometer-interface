@@ -74,10 +74,7 @@ Measurement = Astro.Class({
           if(prefixedDataSets[dataKey] === undefined)
             prefixedDataSets[dataKey] = {data: []};
           //map properties from database schema to dataSet schema
-          console.log("data: "+JSON.stringify(data[dataKey]));
-          console.log(dataKey);
-          console.log(data);
-          console.log(data["speed"]);
+          console.log(data[key]);
           prefixedDataSets[dataKey].data.push({x: timeStamp, y: data[dataKey]});
         }
       }
