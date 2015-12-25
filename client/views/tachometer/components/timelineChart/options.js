@@ -1,3 +1,5 @@
+const FONT_FAMILY = "'Roboto','Helvetica','Arial',sans-serif";
+
 TimelineChart.OPTIONS = {
   tooltips: {
      mode: 'label',
@@ -20,12 +22,13 @@ TimelineChart.OPTIONS = {
         type: "time",
         time: {
           format: "HH:mm:ss:SSS",
-          // unit: 'millisecond',
+          unit: 'second',
           // displayFormat: "HH:mm:ss:SSS"
         },
-        scaleLabel: {
-          display: true,
-        },
+        ticks: {
+          fontFamily: FONT_FAMILY,
+          fontSize: 14
+        }
       }],
       yAxes: [{
         type: "linear",
@@ -33,7 +36,11 @@ TimelineChart.OPTIONS = {
         scaleLabel: {
           display: true,
           labelString: 'Geschwindigkeit',
-          id:"speed"
+          id:"speed",
+          fontFamily: FONT_FAMILY
+        },
+        ticks: {
+          fontFamily: FONT_FAMILY
         }
       },
       {
@@ -42,7 +49,11 @@ TimelineChart.OPTIONS = {
         scaleLabel: {
           display: true,
           labelString: 'Frequenz',
-          id:"frequency"
+          id:"frequency",
+          fontFamily: FONT_FAMILY
+        },
+        ticks: {
+          fontFamily: FONT_FAMILY
         }
       }]
     },

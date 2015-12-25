@@ -1,6 +1,11 @@
 TachometerTimeline = React.createClass({
   mixins: [ReactMeteorData],
   render(){
+    //show spinner while loading
+    if(this.data.isLoading){
+      return <TachometerCenteredSpinner/>;
+    }
+
     return (
       <canvas ref="canvas" style={{margin: "1em"}}/>
     );
@@ -16,7 +21,7 @@ TachometerTimeline = React.createClass({
 
     return data;
   },
-  componentWillUpdate(){
+  componentDidUpdate(){
     if(this.data.measurement !== undefined)
       this.renderChart();
   },
