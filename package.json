@@ -1,0 +1,32 @@
+{
+  "name": "tachometer-interface",
+  "version": "1.0.0",
+  "description": "web interface for our tachometer",
+  "main": "index.js",
+  "dependencies": {
+    "moment": "^2.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fit-AG/tachometer-interface.git"
+  },
+  "keywords": [
+    "tachometer",
+    "meteorjs",
+    "react",
+    "redux",
+    "lejos",
+    "mdl",
+    "frontend"
+  ],
+  "author": "vailfire",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fit-AG/tachometer-interface/issues"
+  },
+  "homepage": "https://github.com/Fit-AG/tachometer-interface#readme"
+}
