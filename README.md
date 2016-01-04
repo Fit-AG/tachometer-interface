@@ -4,8 +4,9 @@ Visit the [*prototype* branch](https://github.com/Fit-AG/tachometer-interface/tr
 
 ## Project structure
 The project will consist of three branches:
+
 branch | description
---------- | -------------
+------ | -----------
 **master** | Will contain the last stable version - i.e. *works without side-effects or unfinished features*
 **devel** | Contains the current, active development
 **prototype** | Contains the abandoned prototype of this project
