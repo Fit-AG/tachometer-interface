@@ -26,5 +26,5 @@ jagi:astronomy
 less
 react
 kadira:react-layout
-kadira:flow-router
+# kadira:flow-router
 zodiase:mdl
